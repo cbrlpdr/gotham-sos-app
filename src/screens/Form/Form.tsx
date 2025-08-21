@@ -64,8 +64,9 @@ export function Form({ handleBackButton }: FormProps) {
                 />
                 <TouchableOpacity
                     onPress={() => {
-                        if (!location.trim() || !phone.trim() || !name.trim()) Alert.alert('Erro!', 'Preencha todas as informações!')
-                        else {
+                        if ( !location.trim() || !phone.trim() || !name.trim()) Alert.alert('Erro!', 'Preencha todas as informações!')
+                        else if(location == "Carregando localização...") Alert.alert('Localização sendo carregada...', 'Por favor, aguarde e tente novamente')
+                            else {
                             Alert.alert('Suas informações foram enviadas!', 'Em breve você estará a salvo! 🦇');
                             handleBackButton
                         }
