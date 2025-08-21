@@ -11,6 +11,8 @@ interface FormProps {
 export function Form({ handleBackButton }: FormProps) {
 
     const [location, setLocation] = useState('');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
 
     const handleGetLocation = async () => {
         setLocation('Carregando localização...');
@@ -40,11 +42,15 @@ export function Form({ handleBackButton }: FormProps) {
                 <Text style={styles.instructions}>Informe os dados abaixo para que nossa equipe de segurança possa localizar você e prestar atendimento imediato</Text>
                 <Text style={styles.label}>NOME: </Text>
                 <TextInput
+                    value={name}
+                    onChangeText={(input) => setName(input)}
                     style={styles.input}
                 />
 
                 <Text style={styles.label}>TELEFONE: </Text>
                 <TextInput
+                    value={phone}
+                    onChangeText={(input) => setPhone(input)}
                     keyboardType='phone-pad'
                     style={styles.input}
                 />
@@ -58,11 +64,14 @@ export function Form({ handleBackButton }: FormProps) {
                 />
                 <TouchableOpacity
                     onPress={() => {
-                        Alert.alert('Suas informações foram enviadas!', 'Em breve você estará a salvo! 🦇');
-                        handleBackButton
+                        if (!location.trim() || !phone.trim() || !name.trim()) Alert.alert('Erro!', 'Preencha todas as informações!')
+                        else {
+                            Alert.alert('Suas informações foram enviadas!', 'Em breve você estará a salvo! 🦇');
+                            handleBackButton
+                        }
                     }}
                 >
-                    <Text style={styles.sendButton}> 
+                    <Text style={styles.sendButton}>
                         ENVIAR INFORMAÇÕES
                     </Text>
                 </TouchableOpacity>
